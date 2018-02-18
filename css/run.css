@@ -1,0 +1,44 @@
+#sheep.run_left {
+	bottom: 0;
+	width: 25%;
+	height: 25%;
+	padding-bottom: 37px;
+	background: url('../spritesheets/white_sheep_1/__white_sheep_1_run.png');
+	background-size: 500%;
+  	position: fixed;
+  	left: 100%;
+  	z-index: 2;
+	animation: runv 0.9s steps(3) infinite, runh 0.3s steps(5) infinite, totheleft 5s infinite linear;
+}
+
+#sheep.run_right {
+	bottom: 0;
+	width: 25%;
+	height: 25%;
+	padding-bottom: 37px;
+	background: url('../spritesheets/white_sheep_1/__white_sheep_1_run.png');
+	background-size: 500%;
+  	position: fixed;
+  	left: -25%;
+  	z-index: 2;
+  	transform: scaleX(-1);
+	animation: runv 0.9s steps(3) infinite, runh 0.3s steps(5) infinite, totheleft 5s infinite linear;
+}
+
+@keyframes runv {
+	  0% { background-position-y:   0%; }
+	100% { background-position-y: 141%; }
+}
+
+@keyframes runh {
+      0% { background-position-x:   0%; }
+   	100% { background-position-x: 125%; }
+}
+
+@keyframes totheleft {
+	100% { left: -25%; }
+}
+
+@keyframes totheright {
+	100% { left: 100%; }
+}

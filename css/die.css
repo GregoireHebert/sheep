@@ -1,0 +1,33 @@
+#sheep.die_left {
+	bottom: 0;
+	width: 25%;
+	height: 25%;
+	padding-bottom: 37px;
+  	position: fixed;
+  	left: 33%;
+	z-index: 2;
+	background: url('../spritesheets/white_sheep_1/__white_sheep_1_die.png');
+	background-size: 500%;
+	animation: die 0.6s steps(4);
+	animation-fill-mode: forwards;
+}
+
+#sheep.die_right {
+	bottom: 0;
+	width: 25%;
+	height: 25%;
+	padding-bottom: 37px;
+  	position: fixed;
+  	left: 33%;
+	z-index: 2;
+	background: url('../spritesheets/white_sheep_1/__white_sheep_1_die.png');
+	background-size: 500%;
+	animation: die 0.6s steps(4);
+	animation-fill-mode: forwards;
+	transform: scaleX(-1);
+}
+
+@keyframes die {
+     0% { background-position-x:   0px; }
+   100% { background-position-x: 100%; }
+}

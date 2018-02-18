@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>env</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<link href="css/decor.css" media="all" rel="stylesheet">
+	<link href="css/eating.css" media="all" rel="stylesheet">
+	<link href="css/idle.css" media="all" rel="stylesheet">
+	<link href="css/walk.css" media="all" rel="stylesheet">
+	<link href="css/run.css" media="all" rel="stylesheet">
+	<link href="css/die.css" media="all" rel="stylesheet">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="world">
+		<div id="sky"></div>
+		<div id="grass_front"></div>
+		<div id="sheep" class="idle_left"></div>
+		<div id="grass_back"></div>
+		<div id="treeone"></div>
+		<div id="treetwo"></div>
+		<div id="rockone"></div>
+		<div id="rocktwo"></div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			function whichAnimationEvent(){
+	  			var t,
+				el = document.createElement("sheep");
+
+				var animations = {
+				"animation"      : "animationend",
+				"OAnimation"     : "oAnimationEnd",
+				"MozAnimation"   : "animationend",
+				"WebkitAnimation": "webkitAnimationEnd"
+				}
+
+				for (t in animations){
+					if (el.style[t] !== undefined){
+					  return animations[t];
+					}
+				}
+			}
+
+			var animationEvent = whichAnimationEvent();
+
+			$("#sheep").click(function(){
+
+				var _this = $(this);
+				_this.toggleClass();
+				_this.addClass("grab_left");
+				_this.one(animationEvent, function(event) {
+
+					setTimeout(function(){ 
+
+						_this.toggleClass();
+						_this.addClass("chew_left");
+
+						_this.one(animationEvent, function(event) {
+
+								_this.toggleClass();
+								_this.addClass("swallow_left");
+
+						});
+
+					}, 500);
+
+
+				});
+			});
+			
+		});
+	</script>
+</body>
+</html>
