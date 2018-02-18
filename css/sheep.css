@@ -1,0 +1,8 @@
+#sheep {
+	bottom: -4%;
+	width: 25%;
+	height: 25%;
+	padding-bottom: 37px;
+  	position: fixed;
+	z-index: 2;
+}

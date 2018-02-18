@@ -1,26 +1,12 @@
 #sheep.walk_left {
-	bottom: 0;
-	width: 25%;
-	height: 25%;
-	padding-bottom: 37px;
-	background: url('../spritesheets/white_sheep_1/__white_sheep_1_walk.png') no-repeat 0 0%;
-	background-size: 500%;
-  	position: fixed;
+	background: left 0% / 500% 300% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_walk.png');
   	left: 100%;
-	z-index: 2;
 	animation: walkv 0.9s steps(3) infinite, walkh 0.3s steps(5) infinite, totheleft 10s linear infinite;
 }
 
 #sheep.walk_right {
-	bottom: 0;
-	width: 25%;
-	height: 25%;
-	padding-bottom: 37px;
-	background: url('../spritesheets/white_sheep_1/__white_sheep_1_walk.png') no-repeat 0 0%;
-	background-size: 500%;
-  	position: fixed;
+	background: left 0% / 500% 300% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_walk.png');
   	left: -25%;
-	z-index: 2;
 	transform: scaleX(-1);
 	animation: walkv 0.9s steps(3) infinite, walkh 0.3s steps(5) infinite, totheright 10s linear infinite;
 }
@@ -28,7 +14,7 @@
 
 @keyframes walkv {
      0% { background-position-y:   0%; }
-   100% { background-position-y: 141%; }
+   100% { background-position-y: 150%; }
 }
 
 @keyframes walkh {

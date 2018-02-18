@@ -1,26 +1,12 @@
 #sheep.idle_left {
-	bottom: 0;
-	width: 25%;
-	height: 25%;
-	padding-bottom: 37px;
-	background: url('../spritesheets/white_sheep_1/__white_sheep_1_idle.png') no-repeat 0 0%;
-	background-size: 500%;
-	position: fixed;
+	background: left 0% / 500% 500% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_idle.png');
 	left: 35%;
-	z-index: 2;
 	animation: idlev 1.5s steps(5) infinite, idleh 0.3s steps(5) infinite;
 }
 
 #sheep.idle_right {
-	bottom: 0;
-	width: 25%;
-	height: 25%;
-	padding-bottom: 37px;
-	background: url('../spritesheets/white_sheep_1/__white_sheep_1_idle.png') no-repeat 0 0%;
-	background-size: 500%;
-	position: fixed;
+	background: left 0% / 500% 500% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_idle.png');
 	left: 35%;
-	z-index: 2;
 	transform: scaleX(-1);
 	animation: idlev 1.5s steps(5) infinite, idleh 0.3s steps(5) infinite;
 }
@@ -30,7 +16,7 @@
 		background-position-y: 0%;
 	}
 	to {
-		background-position-y: 121%;
+		background-position-y: 125%;
 	}
 }
 
