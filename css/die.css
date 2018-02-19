@@ -14,6 +14,5 @@
 }
 
 @keyframes die {
-     0% { background-position-x:   0px; }
-   100% { background-position-x: 100%; }
+   100% { background-position-x: 100%; } // exatly 100% because of the forwards fill mode
 }

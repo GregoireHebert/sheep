@@ -9,16 +9,15 @@
 	left: 35%;
 	transform: scaleX(-1);
 	animation: eatingv 1.5s steps(5) 3, eatingh 0.3s steps(5) 15;
+	animation-fill-mode: forwards;
 }
 
 @keyframes eatingv {
-	0% { background-position-y: 0%; }
-	100% { background-position-y: 125%; }
+	100% { background-position-y: calc(100% + (100% / 4)); } // divided by number of rows -1 because of the repetition
 }
 
 @keyframes eatingh {
-	0% { background-position-x: 0%; }
-	100% { background-position-x: 125%; }
+	100% { background-position-x: calc(100% + (100% / 4)); } // divided by number of cols -1 because of the repetition
 }
 
 #sheep.grab_left {
@@ -37,13 +36,11 @@
 }
 
 @keyframes toeatv {
-     0% { background-position-y:  0%; }
-   100% { background-position-y: 100%; }
+   100% { background-position-y: 100%; }  // exatly 100% because of the forwards fill mode
 }
 
 @keyframes toeath {
-     0% { background-position-x:   0%; }
-   100% { background-position-x: 100%; }
+   100% { background-position-x: 100%; } // exatly 100% because of the forwards fill mode
 }
 
 #sheep.swallow_left {
@@ -62,11 +59,9 @@
 }
 
 @keyframes endeatingv {
-     0% { background-position-y:  0%; }
-   100% { background-position-y: 100%; }
+   100% { background-position-y: 100%; } // exatly 100% because of the forwards fill mode
 }
 
 @keyframes endeatingh {
-     0% { background-position-x:   0%; }
-   100% { background-position-x: 100%; }
+   100% { background-position-x: 100%; } // exatly 100% because of the forwards fill mode
 }

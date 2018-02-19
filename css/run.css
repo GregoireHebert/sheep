@@ -12,19 +12,9 @@
 }
 
 @keyframes runv {
-	  0% { background-position-y:   0%; }
-	100% { background-position-y: 141%; }
+	100% { background-position-y: calc(100% + (100% / 2)); } // divided by number of rows -1 because of the repetition
 }
 
 @keyframes runh {
-      0% { background-position-x:   0%; }
-   	100% { background-position-x: 125%; }
-}
-
-@keyframes totheleft {
-	100% { left: -25%; }
-}
-
-@keyframes totheright {
-	100% { left: 100%; }
+   	100% { background-position-x: calc(100% + (100% / 4)); } // divided by number of cols -1 because of the repetition
 }
