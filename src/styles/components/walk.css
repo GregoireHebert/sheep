@@ -1,11 +1,11 @@
 #sheep.walk_left {
-	background: left 0 / 500% 300% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_walk.png');
+	background: left 0 / 500% 300% no-repeat url('/spritesheets/white_sheep_1/__white_sheep_1_walk.png');
 	transform: scaleX(1);
 	animation: walkv 0.9s steps(3) infinite, walkh 0.3s steps(5) infinite, totheleft 10s linear infinite;
 }
 
 #sheep.walk_right {
-	background: left 0 / 500% 300% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_walk.png');
+	background: left 0 / 500% 300% no-repeat url('/spritesheets/white_sheep_1/__white_sheep_1_walk.png');
 	transform: scaleX(-1);
 	animation: walkv 0.9s steps(3) infinite, walkh 0.3s steps(5) infinite, totheright 10s linear infinite;
 }
