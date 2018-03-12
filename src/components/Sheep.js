@@ -1,80 +1,201 @@
 import React, { Component } from 'react';
-import * as AnimationControl from './Animations/AnimationControl';
 
 export default class Sheep extends Component {
-
-    run = () => {
-        if (AnimationControl.moving) return;
-        AnimationControl.moving = true;
-
-        AnimationControl.sheep.toggleClass();
-        AnimationControl.sheep.addClass("run_"+AnimationControl.direction);
-
-
-        setTimeout(function(){
-            AnimationControl.sheep.css('left', sheep.css('left'));
-            AnimationControl.sheep.toggleClass();
-            AnimationControl.sheep.addClass("idle_"+AnimationControl.direction);
-
-            setTimeout(function() {
-                AnimationControl.direction = AnimationControl.direction === 'right' ? 'left' : 'right';
-                AnimationControl.sheep.addClass("run_"+AnimationControl.direction);
-
-                setTimeout(function(){
-                    AnimationControl.sheep.css('left', sheep.css('left'));
-                    AnimationControl.sheep.toggleClass();
-                    AnimationControl.sheep.addClass("idle_"+AnimationControl.direction);
-
-                        //      AnimationControl.moving = false;
-                }, Math.random()*2000+2000);
-            }, 1000);
-
-
-        }, 4900);
+  state = {
+    direction: Math.random() < 0.5 ? 'left' : 'right',
+    moving: false,
+    style: {
+      left: '35%'
     }
+  };
 
-    walk = () => {
-        if (AnimationControl.moving) return;
-        AnimationControl.moving = true;
+  /**
+   * - Get `left` property from stylesheets, and update state
+   * - Reset classes
+   */
+  updatePositionAndReset = () => {
+    const left = window.getComputedStyle(this.sheep).getPropertyValue('left');
 
-        sheep.toggleClass();
-        sheep.addClass("walk_"+direction);
+    this.setState(() => ({
+      style: { left }
+    }));
 
-        setTimeout(function(){
-            sheep.css('left', sheep.css('left'));
-            sheep.toggleClass();
-            sheep.addClass("idle_"+direction);
+    this.sheep.removeAttribute('class');
+    this.sheep.classList.add(`idle_${this.state.direction}`);
+  };
 
-            setTimeout(function() {
-                direction = direction === 'right' ? 'left' : 'right';
-                sheep.addClass("walk_"+direction);
+  whichAnimationEvent = () => {
+    let t, el = document.createElement("sheep");
 
-                setTimeout(function(){
-                    sheep.css('left', sheep.css('left'));
-                    sheep.toggleClass();
-                    sheep.addClass("idle_"+direction);
-                    AnimationControl.moving = false;
-                }, Math.random()*4000+2000);
-            }, 1000);
+    let animations = {
+      "animation": "animationend",
+      "OAnimation": "oAnimationEnd",
+      "MozAnimation": "animationend",
+      "WebkitAnimation": "webkitAnimationEnd"
+    };
 
-
-        }, 10000);
+    for (t in animations) {
+      if (el.style[t] !== undefined) {
+        return animations[t];
+      }
     }
+  };
 
-    componentDidMount() {
-        switch (this.props.animation) {
-            case 'run':
-                this.run();
-            case 'walk':
-                this.walk();
-            default:
-                return;
-        }
-    }
+  run = () => {
+    if (this.state.moving) return;
+    this.setState(() => ({ moving: true }));
 
-    render () {
-        return (
-            <div id="sheep" className="idle_left">&nbsp;</div>
-        )
+    this.sheep.removeAttribute('class');
+    this.sheep.classList.add(`run_${this.state.direction}`);
+
+    setTimeout(() => {
+      this.updatePositionAndReset();
+
+      setTimeout(() => {
+        this.setState((prevState) => ({
+          direction: prevState.direction === 'right' ? 'left' : 'right'
+        }), () => {
+          this.sheep.classList.add(`run_${this.state.direction}`);
+        });
+
+        setTimeout(() => {
+          this.updatePositionAndReset();
+          this.setState(() => ({ moving: false }));
+        }, Math.random() * 2000 + 2000);
+      }, 1000);
+    }, 4900);
+  };
+
+  die = () => {
+    if (this.state.moving) return;
+    this.setState(() => ({ moving: true }));
+
+    this.sheep.removeAttribute('class');
+    this.sheep.classList.add(`die_${this.state.direction}`);
+    this.setState(() => ({ moving: false }));
+  };
+
+  idle = () => {
+    if (this.state.moving) return;
+    this.setState(() => ({ moving: true }));
+
+    this.sheep.removeAttribute('class');
+    this.sheep.classList.add(`idle_${this.state.direction}`);
+    this.setState(() => ({ moving: false }));
+  };
+
+  eat = () => {
+    if (this.state.moving) return;
+    this.setState(() => ({ moving: true }));
+
+    this.sheep.removeAttribute('class');
+    this.sheep.classList.add(`grab_${this.state.direction}`);
+
+    this.sheep.addEventListener(this.whichAnimationEvent(), (e) => {
+      // Trigger once
+      if (e.currentTarget.dataset.triggered) return;
+      e.currentTarget.dataset.triggered = true;
+
+      setTimeout(() => {
+        this.sheep.removeAttribute('class');
+        this.sheep.classList.add(`chew_${this.state.direction}`);
+
+        this.sheep.addEventListener(this.whichAnimationEvent(), () => {
+          this.sheep.removeAttribute('class');
+          this.sheep.classList.add(`swallow_${this.state.direction}`);
+
+          setTimeout(() => {
+            this.sheep.removeAttribute('class');
+            this.sheep.classList.add(`idle_${this.state.direction}`);
+
+            this.setState(() => ({ moving: false }));
+          }, 1000);
+        });
+      }, 500);
+    });
+  };
+
+  walk = () => {
+    if (this.state.moving) return;
+    this.setState(() => ({ moving: true }));
+
+    this.sheep.removeAttribute('class');
+    this.sheep.classList.add(`walk_${this.state.direction}`);
+
+    setTimeout(() => {
+      this.updatePositionAndReset();
+
+      setTimeout(() => {
+        this.setState((prevState) => ({
+          direction: prevState.direction === 'right' ? 'left' : 'right'
+        }), () => {
+          this.sheep.classList.add(`walk_${this.state.direction}`);
+        });
+
+        setTimeout(() => {
+          this.updatePositionAndReset();
+          this.setState(() => ({ moving: false }));
+        }, Math.random() * 4000 + 2000);
+      }, 1000);
+    }, 9000);
+  };
+
+  animate = (animation) => {
+    switch (animation) {
+      case 'run':
+        return this.run();
+      case 'walk':
+        return this.walk();
+      case 'eat':
+        return this.eat();
+      case 'die':
+        return this.die();
+      case 'idle':
+        return this.idle();
+      default:
+        return this.idle();
     }
+  };
+
+  componentDidMount() {
+    this.animate(this.props.animation);
+  }
+
+  componentWillReceiveProps(nextProps)  {
+    this.animate(nextProps.animation);
+  };
+
+  render() {
+    // Fake style for dev
+    const nav = {
+      position: 'fixed',
+      zIndex: 10,
+      top: '20px',
+      left: '20px'
+    };
+
+    return (
+      <div>
+        {/* for dev only */}
+        <div className="nav" style={nav}>
+          <button onClick={this.run}>Run</button>
+          <button onClick={this.die}>Die</button>
+          <button onClick={this.idle}>Idle</button>
+          <button onClick={this.walk}>Walk</button>
+          <button onClick={this.eat}>Eat</button>
+        </div>
+
+        <div
+          id="sheep"
+          className="idle_left"
+          ref={(sheep) => {
+            this.sheep = sheep;
+          }}
+          style={this.state.style}
+        >
+          &nbsp;
+        </div>
+      </div>
+    )
+  }
 }
