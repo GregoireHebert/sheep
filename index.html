@@ -30,55 +30,19 @@
 		<div id="rocktwo"></div>
 	</div>
 
+	<script src="js/events.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
+        let eat = new Event('eat');
+        let walk = new Event('walk');
+        let run = new Event('run');
+        let die = new Event('die');
+        let idle = new Event('idle');
 
-			function whichAnimationEvent(){
-	  			var t,
-				el = document.createElement("sheep");
-
-				var animations = {
-				"animation"      : "animationend",
-				"OAnimation"     : "oAnimationEnd",
-				"MozAnimation"   : "animationend",
-				"WebkitAnimation": "webkitAnimationEnd"
-				}
-
-				for (t in animations){
-					if (el.style[t] !== undefined){
-					  return animations[t];
-					}
-				}
-			}
-
-			var animationEvent = whichAnimationEvent();
-
-			$("#sheep").click(function(){
-
-				var _this = $(this);
-				_this.toggleClass();
-				_this.addClass("grab_left");
-				_this.one(animationEvent, function(event) {
-
-					setTimeout(function(){ 
-
-						_this.toggleClass();
-						_this.addClass("chew_left");
-
-						_this.one(animationEvent, function(event) {
-
-								_this.toggleClass();
-								_this.addClass("swallow_left");
-
-						});
-
-					}, 500);
-
-
-				});
-			});
-			
-		});
+        //document.dispatchEvent(eat);
+        //document.dispatchEvent(walk);
+        //document.dispatchEvent(run);
+        //document.dispatchEvent(die);
+        //document.dispatchEvent(idle);
 	</script>
 </body>
 </html>
