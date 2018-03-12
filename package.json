@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev-server": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack -p"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
