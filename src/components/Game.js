@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sheep from './Sheep';
+import Hud from './Hud';
 
 export default class Game extends Component {
   state = {
@@ -13,7 +14,7 @@ export default class Game extends Component {
 
     setInterval(() => {
       this.setState(() =>  ({ animation: anims[Math.floor(Math.random()*anims.length)] }));
-    }, 30000);
+    }, 20000);
   }
 
   render () {
@@ -21,7 +22,7 @@ export default class Game extends Component {
       <div id="world">
         <div id="sky">&nbsp;</div>
         <div id="grass_front">&nbsp;</div>
-
+        <Hud />
         <Sheep animation={this.state.animation} />
 
         <div id="grass_back">&nbsp;</div>

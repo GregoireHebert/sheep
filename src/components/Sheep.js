@@ -24,23 +24,6 @@ export default class Sheep extends Component {
     this.sheep.classList.add(`idle_${this.state.direction}`);
   };
 
-  whichAnimationEvent = () => {
-    let t, el = document.createElement("sheep");
-
-    let animations = {
-      "animation": "animationend",
-      "OAnimation": "oAnimationEnd",
-      "MozAnimation": "animationend",
-      "WebkitAnimation": "webkitAnimationEnd"
-    };
-
-    for (t in animations) {
-      if (el.style[t] !== undefined) {
-        return animations[t];
-      }
-    }
-  };
-
   run = () => {
     if (this.state.moving) return;
     this.setState(() => ({ moving: true }));
@@ -61,24 +44,18 @@ export default class Sheep extends Component {
         setTimeout(() => {
           this.updatePositionAndReset();
           this.setState(() => ({ moving: false }));
-        }, Math.random() * 2000 + 2000);
+        }, Math.random() * 3000 + 1000);
       }, 1000);
     }, 4900);
   };
 
   die = () => {
-    if (this.state.moving) return;
-    this.setState(() => ({ moving: true }));
-
     this.sheep.removeAttribute('class');
     this.sheep.classList.add(`die_${this.state.direction}`);
     this.setState(() => ({ moving: false }));
   };
 
   idle = () => {
-    if (this.state.moving) return;
-    this.setState(() => ({ moving: true }));
-
     this.sheep.removeAttribute('class');
     this.sheep.classList.add(`idle_${this.state.direction}`);
     this.setState(() => ({ moving: false }));
@@ -91,28 +68,22 @@ export default class Sheep extends Component {
     this.sheep.removeAttribute('class');
     this.sheep.classList.add(`grab_${this.state.direction}`);
 
-    this.sheep.addEventListener(this.whichAnimationEvent(), (e) => {
-      // Trigger once
-      if (e.currentTarget.dataset.triggered) return;
-      e.currentTarget.dataset.triggered = true;
+    setTimeout(() => {
+      this.sheep.removeAttribute('class');
+      this.sheep.classList.add(`chew_${this.state.direction}`);
 
-      setTimeout(() => {
-        this.sheep.removeAttribute('class');
-        this.sheep.classList.add(`chew_${this.state.direction}`);
-
-        this.sheep.addEventListener(this.whichAnimationEvent(), () => {
-          this.sheep.removeAttribute('class');
-          this.sheep.classList.add(`swallow_${this.state.direction}`);
-
-          setTimeout(() => {
+        setTimeout(() => {
             this.sheep.removeAttribute('class');
-            this.sheep.classList.add(`idle_${this.state.direction}`);
+            this.sheep.classList.add(`swallow_${this.state.direction}`);
 
-            this.setState(() => ({ moving: false }));
-          }, 1000);
-        });
-      }, 500);
-    });
+            setTimeout(() => {
+                this.updatePositionAndReset();
+                this.setState(() => ({ moving: false }));
+            }, 700);
+
+        }, 4500);
+
+    }, 700);
   };
 
   walk = () => {
@@ -135,7 +106,7 @@ export default class Sheep extends Component {
         setTimeout(() => {
           this.updatePositionAndReset();
           this.setState(() => ({ moving: false }));
-        }, Math.random() * 4000 + 2000);
+        }, Math.random() * 5000 + 2000);
       }, 1000);
     }, 9000);
   };
@@ -177,13 +148,13 @@ export default class Sheep extends Component {
     return (
       <div>
         {/* for dev only */}
-        <div className="nav" style={nav}>
-          <button onClick={this.run}>Run</button>
-          <button onClick={this.die}>Die</button>
-          <button onClick={this.idle}>Idle</button>
-          <button onClick={this.walk}>Walk</button>
-          <button onClick={this.eat}>Eat</button>
-        </div>
+        {/*<div className="nav" style={nav}>*/}
+          {/*<button onClick={this.run}>Run</button>*/}
+          {/*<button onClick={this.die}>Die</button>*/}
+          {/*<button onClick={this.idle}>Idle</button>*/}
+          {/*<button onClick={this.walk}>Walk</button>*/}
+          {/*<button onClick={this.eat}>Eat</button>*/}
+        {/*</div>*/}
 
         <div
           id="sheep"
