@@ -1,10 +1,10 @@
 #sheep.idle_left {
-	background: left 0 / 500% 500% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_idle.png');
+	background: left 0 / 500% 500% no-repeat url('/spritesheets/white_sheep_1/__white_sheep_1_idle.png');
 	animation: idlev 1.5s steps(5) infinite, idleh 0.3s steps(5) infinite;
 }
 
 #sheep.idle_right {
-	background: left 0 / 500% 500% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_idle.png');
+	background: left 0 / 500% 500% no-repeat url('/spritesheets/white_sheep_1/__white_sheep_1_idle.png');
 	transform: scaleX(-1);
 	animation: idlev 1.5s steps(5) infinite, idleh 0.3s steps(5) infinite;
 }

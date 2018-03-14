@@ -1,12 +1,12 @@
 #sheep.run_left {
-	background: left 0 / 500% 300% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_run.png');
+	background: left 0 / 500% 300% no-repeat url('/spritesheets/white_sheep_1/__white_sheep_1_run.png');
 	transform: scaleX(1);
 	animation: runv 0.9s steps(3) infinite, runh 0.3s steps(5) infinite, totheleft 5s infinite linear;
 }
 
 #sheep.run_right {
-	background: left 0 / 500% 300% no-repeat url('../spritesheets/white_sheep_1/__white_sheep_1_run.png');
-  	transform: scaleX(-1);
+	background: left 0 / 500% 300% no-repeat url('/spritesheets/white_sheep_1/__white_sheep_1_run.png');
+  transform: scaleX(-1);
 	animation: runv 0.9s steps(3) infinite, runh 0.3s steps(5) infinite, totheright 5s infinite linear;
 }
 
